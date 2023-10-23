@@ -16,27 +16,14 @@ describe('Account tests', function () {
 
   beforeEach(async function () {
     // Initialize the WebDriver and open the browser
-    driver = DriverFactory.createDriver('chrome'); //Browser choice - chrome, firefox, edge
+    const browserName = global.browserName || process.env.BROWSER_NAME || 'chrome';
+    driver = DriverFactory.createDriver(browserName);
     loginPage = new LoginPage(driver);
     accountPage = new AccountPage(driver);
   });
 
    // After each test case, check if it failed and take a screenshot
    afterEach(async function () {
-    if (this.currentTest.state === "failed") {
-      await accountPage.takeScreenshot(this.currentTest.title, screenshotDir);
-    }
-  });
-  
-    // After each test case, check if it failed and take a screenshot
-  afterEach(async function () {
-    if (this.currentTest.state === "failed") {
-      await accountPage.takeScreenshot(this.currentTest.title, screenshotDir);
-    }
-  });
-
-   // After each test case, check if it failed and take a screenshot
-  afterEach(async function () {
     if (this.currentTest.state === "failed") {
       await accountPage.takeScreenshot(this.currentTest.title, screenshotDir);
     }
@@ -48,6 +35,7 @@ describe('Account tests', function () {
   });
 
   it('Successful Bank Account Creation Process Test', async function () {
+
     // Perform login
     await loginPage.performLogin();
     // Create account
@@ -76,6 +64,7 @@ describe('Account tests', function () {
   });
 
   it('Successful Bank Account Deletion Process Test', async function () {
+
     // Perform login
     await loginPage.performLogin();
     // Delete account

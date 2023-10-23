@@ -9,6 +9,7 @@ const screenshotDir = "./screenshots";
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
+
 describe('Transaction tests', function () {
   let driver;
   let loginPage;
@@ -16,7 +17,8 @@ describe('Transaction tests', function () {
 
   beforeEach(async function () {
     // Initialize the WebDriver and open the browser
-    driver = DriverFactory.createDriver('chrome'); //Browser choice - chrome, firefox, edge
+    const browserName = global.browserName || process.env.BROWSER_NAME || 'chrome'; //Browser choice - chrome, firefox, edge
+    driver = DriverFactory.createDriver(browserName);
     loginPage = new LoginPage(driver);
     transactionPage = new TransactionPage(driver);
   });
@@ -26,6 +28,7 @@ describe('Transaction tests', function () {
     if (this.currentTest.state === "failed") {
       await transactionPage.takeScreenshot(this.currentTest.title, screenshotDir);
     }
+   });
 
   afterEach(async function () {
     // Quit the WebDriver after the test is complete

@@ -14,12 +14,13 @@ describe('User Info Edit Tests', function () {
   let loginPage;
   let userInfoPage;
 
-  before(async function () {
+  beforeEach(async function () {
     // Initialize the WebDriver and open the browser
-    driver = DriverFactory.createDriver('chrome'); //Browser choice - chrome, firefox, edge
+
+    const browserName = global.browserName || process.env.BROWSER_NAME || 'chrome'; //Browser choice - chrome, firefox, edge
+    driver = DriverFactory.createDriver(browserName);
     loginPage = new LoginPage(driver);
     userInfoPage = new UserInfoPage(driver);
-   
   });
 
    // After each test case, check if it failed and take a screenshot
@@ -27,8 +28,9 @@ describe('User Info Edit Tests', function () {
     if (this.currentTest.state === "failed") {
       await userInfoPage.takeScreenshot(this.currentTest.title, screenshotDir);
     }
-
-  after(async function () {
+   });
+  
+  afterEach(async function () {
     // Quit the WebDriver after the test is complete
     await driver.quit();
   });

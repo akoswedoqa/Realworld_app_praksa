@@ -1,8 +1,8 @@
-# Cypress RealWorld App Functional Testing
+# Cypress RealWorld App Automated Testing
 
 ## Overview
 
-This repository contains a comprehensive test suite designed for functional testing of the Cypress RealWorld App.
+This repository contains an extensive test suite designed for automated testing of the Cypress RealWorld App. The Cypress RealWorld App can be downloaded from [here](https://github.com/cypress-io/cypress-realworld-app). Instructions on how to set up and use the RealWorld App are provided in its README file.
 
 ## Prerequisites
 
@@ -34,12 +34,28 @@ To set up the Cypress RealWorld App testing environment, follow these steps:
 
 ## Configuration
 
-Configuration settings are maintained in the utils directory. This file contains data for both valid and invalid user accounts, URLs for different pages, and element locators used throughout the test scripts, as well as driver factory.
+Configuration settings are maintained in the `utils` directory. This file contains data for both valid and invalid user accounts, URLs for different pages, and element locators used throughout the test scripts, as well as driver factory.
 
 ## Running the Tests
 
-To execute the functional tests, use the following command:
+To execute the functional tests, you can use the following commands:
 
-```bash
-npm test
-```
+- To run all tests in the default browser (Chrome), use:
+
+    ```bash
+    npm test
+    ```
+
+- To run all tests in a specific browser, use the `--browser_name` flag with the desired browser name. Supported browsers are Chrome, Firefox, and Edge. For example, to run tests in Firefox:
+
+    ```bash
+    npm test --browser_name=firefox
+    ```
+
+- To run a specific test in a specific browser, use the `npm run test-suite` command followed by the test name and browser name. For example, to run a test named `signup.test.js` in Edge:
+
+    ```bash
+    npm run test-suite signup.test.js edge
+    ```
+
+Make sure you have the specified browser (Chrome, Firefox, or Edge) installed on your system and correctly configured for Cypress testing to use the browser of your choice.
